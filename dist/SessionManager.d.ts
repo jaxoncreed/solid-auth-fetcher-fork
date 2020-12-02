@@ -10,7 +10,6 @@ export declare class SessionManager extends EventEmitter {
   private authFetcher;
   private sessionRecords;
   private isInitialized;
-  private handledIncomingRedirect;
   constructor(options?: ISessionManagerOptions);
   private init;
   private addNewSessionRecord;

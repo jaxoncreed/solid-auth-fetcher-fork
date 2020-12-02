@@ -84,7 +84,7 @@ let AuthFetcher = class AuthFetcher {
     return this.authenticatedFetcher.handle(credentials, url, init);
   }
   async logout(sessionId) {
-    this.logoutHandler.handle(sessionId);
+    await this.logoutHandler.handle(sessionId);
   }
   async getSessionInfo(sessionId) {
     return this.sessionInfoManager.get(sessionId);

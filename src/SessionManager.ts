@@ -39,7 +39,6 @@ export class SessionManager extends EventEmitter {
     { session: Session; logoutCallback: () => unknown }
   > = {};
   private isInitialized = false;
-  private handledIncomingRedirect = false;
 
   constructor(options: ISessionManagerOptions = {}) {
     super();
@@ -142,15 +141,12 @@ export class SessionManager extends EventEmitter {
   }
 
   async handleIncomingRedirect(url: string): Promise<void> {
-    if (!this.handledIncomingRedirect) {
-      // This will always cause the user to log in. If not it will throw an error.
-      const sessionInfo = await this.authFetcher.handleIncomingRedirect(url);
-      if (sessionInfo) {
-        const session = this.getSessionFromCurrentSessionInfo(sessionInfo);
-        this.emit("sessionLogin", session);
-        session.emit("login");
-        this.handledIncomingRedirect = true;
-      }
+    // This will always cause the user to log in. If not it will throw an error.
+    const sessionInfo = await this.authFetcher.handleIncomingRedirect(url);
+    if (sessionInfo) {
+      const session = this.getSessionFromCurrentSessionInfo(sessionInfo);
+      this.emit("sessionLogin", session);
+      session.emit("login");
     }
   }
 }

@@ -10,7 +10,6 @@ class SessionManager extends events_1.EventEmitter {
     super();
     this.sessionRecords = {};
     this.isInitialized = false;
-    this.handledIncomingRedirect = false;
     this.authFetcher = dependencies_1.getAuthFetcherWithDependencies({
       secureStorage: options.secureStorage,
       insecureStorage: options.insecureStorage
@@ -100,14 +99,11 @@ class SessionManager extends events_1.EventEmitter {
     }
   }
   async handleIncomingRedirect(url) {
-    if (!this.handledIncomingRedirect) {
-      const sessionInfo = await this.authFetcher.handleIncomingRedirect(url);
-      if (sessionInfo) {
-        const session = this.getSessionFromCurrentSessionInfo(sessionInfo);
-        this.emit("sessionLogin", session);
-        session.emit("login");
-        this.handledIncomingRedirect = true;
-      }
+    const sessionInfo = await this.authFetcher.handleIncomingRedirect(url);
+    if (sessionInfo) {
+      const session = this.getSessionFromCurrentSessionInfo(sessionInfo);
+      this.emit("sessionLogin", session);
+      session.emit("login");
     }
   }
 }

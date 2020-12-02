@@ -34,7 +34,10 @@ export default class LogoutHandler implements ILogoutHandler {
   }
 
   async handle(userId: string): Promise<void> {
-    this.storageUtility.deleteAllUserData(userId);
+    await Promise.all([
+      this.storageUtility.deleteAllUserData(userId, { secure: false }),
+      this.storageUtility.deleteAllUserData(userId, { secure: true })
+    ]);
     // TODO: trigger onLogOut()
   }
 }

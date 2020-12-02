@@ -82,7 +82,7 @@ export default class AuthFetcher {
   }
 
   async logout(sessionId: string): Promise<void> {
-    this.logoutHandler.handle(sessionId);
+    await this.logoutHandler.handle(sessionId);
   }
 
   async getSessionInfo(sessionId: string): Promise<ISessionInfo | undefined> {

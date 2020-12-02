@@ -41,7 +41,10 @@ let LogoutHandler = class LogoutHandler {
     return true;
   }
   async handle(userId) {
-    this.storageUtility.deleteAllUserData(userId);
+    await Promise.all([
+      this.storageUtility.deleteAllUserData(userId, { secure: false }),
+      this.storageUtility.deleteAllUserData(userId, { secure: true })
+    ]);
   }
 };
 LogoutHandler = __decorate(
