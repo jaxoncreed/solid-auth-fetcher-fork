@@ -49,7 +49,8 @@ let DpopClientKeyManager = class DpopClientKeyManager {
   }
   async generateClientKeyIfNotAlready() {
     let jwk = await this.storageUtility.safeGet(this.getLocalStorageKey(), {
-      schema: JwkSchema_1.default
+      schema: JwkSchema_1.default,
+      secure: true
     });
     if (!jwk) {
       jwk = await this.joseUtility.generateJWK("EC", "P-256", {

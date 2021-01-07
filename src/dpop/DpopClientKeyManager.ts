@@ -55,7 +55,7 @@ export default class DpopClientKeyManager implements IDpopClientKeyManager {
   async generateClientKeyIfNotAlready(): Promise<void> {
     let jwk: JSONWebKey = (await this.storageUtility.safeGet(
       this.getLocalStorageKey(),
-      { schema: jwkSchema }
+      { schema: jwkSchema, secure: true }
     )) as JSONWebKey;
 
     if (!jwk) {
