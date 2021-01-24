@@ -37,7 +37,7 @@ class Session extends events_1.EventEmitter {
     throw new Error("Not Implemented");
   }
   async login(options) {
-    this.authFetcher.login(this.info.sessionId, {
+    await this.authFetcher.login(this.info.sessionId, {
       ...options
     });
     this.emit("login");

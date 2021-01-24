@@ -74,7 +74,7 @@ export class Session extends EventEmitter {
   }
 
   async login(options: ILoginInputOptions): Promise<void> {
-    this.authFetcher.login(this.info.sessionId, {
+    await this.authFetcher.login(this.info.sessionId, {
       ...options
     });
     this.emit("login");
