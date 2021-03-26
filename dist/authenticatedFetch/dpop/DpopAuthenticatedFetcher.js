@@ -87,7 +87,7 @@ let DpopAuthenticatedFetcher = class DpopAuthenticatedFetcher {
       ...requestInit,
       headers: {
         ...HeadersUtils_1.flattenHeaders(requestInitiWithDefaults.headers),
-        authorization: `DPOP ${authToken}`,
+        authorization: `DPoP ${authToken}`,
         dpop: await this.dpopHeaderCreator.createHeaderToken(
           this.urlRepresentationConverter.requestInfoToUrl(url),
           requestInitiWithDefaults.method
