@@ -29,7 +29,10 @@ class IsomorphicJoseUtility {
     return await node_jose_1.JWK.asKey(key, "public");
   }
   async generateCodeVerifier() {
-    return crypto_random_string_1.default({ length: 200, type: "base64" });
+    return crypto_random_string_1.default({
+      length: 100,
+      type: "alphanumeric"
+    });
   }
   async generateCodeChallenge(verifier) {
     const hash = crypto_1.default.createHash("sha256");
