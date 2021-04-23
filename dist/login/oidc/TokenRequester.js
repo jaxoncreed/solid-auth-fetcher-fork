@@ -122,8 +122,8 @@ let TokenRequester = class TokenRequester {
     const decoded = await this.joseUtility.decodeJWT(
       tokenResponse.access_token
     );
-    if (!decoded || !decoded.sub) {
-      throw new Error("The idp returned a bad token without a sub.");
+    if (!decoded || !decoded.webid) {
+      throw new Error("The idp returned a bad token without a webid.");
     }
     await this.storageUtility.setForUser(
       sessionId,
@@ -131,7 +131,7 @@ let TokenRequester = class TokenRequester {
         accessToken: tokenResponse.access_token,
         idToken: tokenResponse.id_token,
         refreshToken: tokenResponse.refresh_token,
-        webId: decoded.sub,
+        webId: decoded.webid,
         isLoggedIn: "true"
       },
       { secure: true }
