@@ -81,7 +81,7 @@
     "jose": "^1.27.2",
     "jsonwebtoken": "^8.5.1",
     "license-checker": "^25.0.1",
-    "lint-staged": "^10.2.11",
+    "lint-staged": "^13.0.1",
     "lodash.clonedeep": "^4.5.0",
     "node-jose": "^2.0.0",
     "react-native-jose": "git+https://github.com/hellojoko/react-native-jose.git",
